@@ -1,0 +1,250 @@
+/*------------------------------- UC1 Creating database as AddessBookService ----------------------------------------*/
+
+mysql> use addressbookservice
+Database changed
+mysql> show tables;
+Empty set (0.00 sec)
+
+
+/*----------------------------------------- UC2 Creating table as AddressBook ---------------------------------------*/
+mysql> create table AddressBook(firstName varchar(20), lastName varchar(20), address varchar(20), city varchar(20),
+ state varchar(20),zipCode varchar(20), phoneNumber varchar(20), email varchar(20) );
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> show tables;
++------------------------------+
+| Tables_in_addressbookservice |
++------------------------------+
+| addressbook                  |
++------------------------------+
+1 row in set (0.00 sec)
+
+
+mysql> desc AddressBook;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| firstName   | varchar(20) | YES  |     | NULL    |       |
+| lastName    | varchar(20) | YES  |     | NULL    |       |
+| address     | varchar(20) | YES  |     | NULL    |       |
+| city        | varchar(20) | YES  |     | NULL    |       |
+| state       | varchar(20) | YES  |     | NULL    |       |
+| zipCode     | varchar(20) | YES  |     | NULL    |       |
+| phoneNumber | varchar(20) | YES  |     | NULL    |       |
+| email       | varchar(20) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+8 rows in set (0.02 sec)
+
+/*----------------------------------------- UC3 Insert Data in AddressBook ------------------------------------------*/
+
+mysql> insert into addressbook values('Mangesh', 'Bhujang', 'Akurdi', 'Pune', 'Maharashtra', '431213','7620263999',
+ 'mangeshb9903@gmail.com');
+Query OK, 1 row affected, 1 warning (0.02 sec)
+
+mysql> select * from addressbook;
++-----------+----------+---------+------+-------------+---------+-------------+----------------------+
+| firstName | lastName | address | city | state       | zipCode | phoneNumber | email                |
++-----------+----------+---------+------+-------------+---------+-------------+----------------------+
+| Mangesh   | Bhujang  | Akurdi  | Pune | Maharashtra | 431213  | 7620263999  | mangeshb9903@gmail.c |
++-----------+----------+---------+------+-------------+---------+-------------+----------------------+
+1 row in set (0.00 sec)
+
+mysql> insert into addressbook values('Nilesh', 'Bhujang', 'Titwala', 'Kalyan', 'Maharashtra', '432213','7620263999',
+ 'nilesh@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into addressbook values('Ram', 'Pawar', 'SantTukaramNagar', 'Pune', 'Maharashtra', '432213','7720263777',
+'ram@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into addressbook values('Vishal', 'Nangre', 'Nagar', 'Nagar', 'Maharashtra', '422213','7720263777',
+ 'vishal@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> insert into addressbook values('Sumit', 'Gundawar', 'Bhadrawati', 'Chandrapur', 'Maharashtra', '412213',
+'9720263777', 'sumit@gmail.com');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from addressbook;
++-----------+----------+------------------+------------+-------------+---------+-------------+----------------------+
+| firstName | lastName | address          | city       | state       | zipCode | phoneNumber | email                |
++-----------+----------+------------------+------------+-------------+---------+-------------+----------------------+
+| Mangesh   | Bhujang  | Akurdi           | Pune       | Maharashtra | 431213  | 7620263999  | mangeshb9903@gmail.c |
+| Nilesh    | Bhujang  | Titwala          | Kalyan     | Maharashtra | 432213  | 7620263999  | nilesh@gmail.com     |
+| Ram       | Pawar    | SantTukaramNagar | Pune       | Maharashtra | 432213  | 7720263777  | ram@gmail.com        |
+| Vishal    | Nangre   | Nagar            | Nagar      | Maharashtra | 422213  | 7720263777  | vishal@gmail.com     |
+| Sumit     | Gundawar | Bhadrawati       | Chandrapur | Maharashtra | 412213  | 9720263777  | sumit@gmail.com      |
++-----------+----------+------------------+------------+-------------+---------+-------------+----------------------+
+5 rows in set (0.00 sec)
+
+
+
+/*----------------------------------------- UC4 Edit Details by Their firstName --------------------------------------*/
+
+mysql> update addressbook set lastName = 'Gunda' where firstName = 'Sumit';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+------------------+------------+-------------+---------+-------------+----------------------+
+| firstName | lastName | address          | city       | state       | zipCode | phoneNumber | email                |
++-----------+----------+------------------+------------+-------------+---------+-------------+----------------------+
+| Mangesh   | Bhujang  | Akurdi           | Pune       | Maharashtra | 431213  | 7620263999  | mangeshb9903@gmail.c |
+| Nilesh    | Bhujang  | Titwala          | Kalyan     | Maharashtra | 432213  | 7620263999  | nilesh@gmail.com     |
+| Ram       | Pawar    | SantTukaramNagar | Pune       | Maharashtra | 432213  | 7720263777  | ram@gmail.com        |
+| Vishal    | Nangre   | Nagar            | Nagar      | Maharashtra | 422213  | 7720263777  | vishal@gmail.com     |
+| Sumit     | Gunda    | Bhadrawati       | Chandrapur | Maharashtra | 412213  | 9720263777  | sumit@gmail.com      |
++-----------+----------+------------------+------------+-------------+---------+-------------+----------------------+
+5 rows in set (0.00 sec)
+
+
+
+/*------------------------------ UC5 Delete Data From AddressBook By Their firstName -------------------------------*/
+
+
+mysql> delete from addressbook where firstName = 'Sumit';
+Query OK, 1 row affected (0.02 sec)
+
+mysql> select * from addressbook;
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+
+| firstName | lastName | address          | city   | state       | zipCode | phoneNumber | email                |
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+
+| Mangesh   | Bhujang  | Akurdi           | Pune   | Maharashtra | 431213  | 7620263999  | mangeshb9903@gmail.c |
+| Nilesh    | Bhujang  | Titwala          | Kalyan | Maharashtra | 432213  | 7620263999  | nilesh@gmail.com     |
+| Ram       | Pawar    | SantTukaramNagar | Pune   | Maharashtra | 432213  | 7720263777  | ram@gmail.com        |
+| Vishal    | Nangre   | Nagar            | Nagar  | Maharashtra | 422213  | 7720263777  | vishal@gmail.com     |
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+
+4 rows in set (0.00 sec)
+
+
+
+/*-------------------------------------- UC6 Retrieving Data By City And State Name ---------------------------------*/
+
+
+mysql> select * from addressbook where city = 'Pune' And state = 'Maharashtra';
++-----------+----------+------------------+------+-------------+---------+-------------+----------------------+
+| firstName | lastName | address          | city | state       | zipCode | phoneNumber | email                |
++-----------+----------+------------------+------+-------------+---------+-------------+----------------------+
+| Mangesh   | Bhujang  | Akurdi           | Pune | Maharashtra | 431213  | 7620263999  | mangeshb9903@gmail.c |
+| Ram       | Pawar    | SantTukaramNagar | Pune | Maharashtra | 432213  | 7720263777  | ram@gmail.com        |
++-----------+----------+------------------+------+-------------+---------+-------------+----------------------+
+2 rows in set (0.02 sec)
+
+
+
+
+/*---------------------------------------------- UC7 Size Of AddressBook By City -----------------------------------*/
+
+
+mysql> select count(*) from addressbook where city = 'Pune';
++----------+
+| count(*) |
++----------+
+|        2 |
++----------+
+1 row in set (0.00 sec)
+
+
+
+
+/*---------------------------------------- UC8 Sort the Data Alphabetically For City --------------------------------*/
+
+
+mysql> select * from addressbook order by city;
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+
+| firstName | lastName | address          | city   | state       | zipCode | phoneNumber | email                |
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+
+| Nilesh    | Bhujang  | Titwala          | Kalyan | Maharashtra | 432213  | 7620263999  | nilesh@gmail.com     |
+| Vishal    | Nangre   | Nagar            | Nagar  | Maharashtra | 422213  | 7720263777  | vishal@gmail.com     |
+| Mangesh   | Bhujang  | Akurdi           | Pune   | Maharashtra | 431213  | 7620263999  | mangeshb9903@gmail.c |
+| Ram       | Pawar    | SantTukaramNagar | Pune   | Maharashtra | 432213  | 7720263777  | ram@gmail.com        |
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+
+4 rows in set (0.00 sec)
+
+
+
+
+/*------------------------------- UC9 Alter Table With Book Name and Contact Type ----------------------------------*/
+
+mysql> alter table addressbook add bookName varchar(20) not null , add contactType varchar(20) not null;
+Query OK, 4 rows affected (0.03 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+----------+-------------+
+| firstName | lastName | address          | city   | state       | zipCode | phoneNumber | email                | bookName | contactType |
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+----------+-------------+
+| Mangesh   | Bhujang  | Akurdi           | Pune   | Maharashtra | 431213  | 7620263999  | mangeshb9903@gmail.c |          |             |
+| Nilesh    | Bhujang  | Titwala          | Kalyan | Maharashtra | 432213  | 7620263999  | nilesh@gmail.com     |          |             |
+| Ram       | Pawar    | SantTukaramNagar | Pune   | Maharashtra | 432213  | 7720263777  | ram@gmail.com        |          |             |
+| Vishal    | Nangre   | Nagar            | Nagar  | Maharashtra | 422213  | 7720263777  | vishal@gmail.com     |          |             |
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> update addressbook set bookName = 'XYZ', contactType = 'family' where firstName = 'Mangesh';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+----------+-------------+
+| firstName | lastName | address          | city   | state       | zipCode | phoneNumber | email                | bookName | contactType |
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+----------+-------------+
+| Mangesh   | Bhujang  | Akurdi           | Pune   | Maharashtra | 431213  | 7620263999  | mangeshb9903@gmail.c | XYZ      | family      |
+| Nilesh    | Bhujang  | Titwala          | Kalyan | Maharashtra | 432213  | 7620263999  | nilesh@gmail.com     |          |             |
+| Ram       | Pawar    | SantTukaramNagar | Pune   | Maharashtra | 432213  | 7720263777  | ram@gmail.com        |          |             |
+| Vishal    | Nangre   | Nagar            | Nagar  | Maharashtra | 422213  | 7720263777  | vishal@gmail.com     |          |             |
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql> select * from addressbook where contactType = 'family';
++-----------+----------+---------+------+-------------+---------+-------------+----------------------+----------+-------------+
+| firstName | lastName | address | city | state       | zipCode | phoneNumber | email                | bookName | contactType |
++-----------+----------+---------+------+-------------+---------+-------------+----------------------+----------+-------------+
+| Mangesh   | Bhujang  | Akurdi  | Pune | Maharashtra | 431213  | 7620263999  | mangeshb9903@gmail.c | XYZ      | family      |
++-----------+----------+---------+------+-------------+---------+-------------+----------------------+----------+-------------+
+1 row in set (0.00 sec)
+
+
+
+
+/*---------------------------------- UC10 Ability to Get Count Data of Contact Type  --------------------------------*/
+
+
+mysql> select count(*) from addressbook where contactType = 'family';
++----------+
+| count(*) |
++----------+
+|        1 |
++----------+
+1 row in set (0.00 sec)
+
+
+
+
+/*-------------------------------------- UC11 Ability to Add Person to Family ---------------------------------------*/
+
+
+mysql> update addressbook set bookName = 'XYZ', contactType = 'family' where firstName = 'Nilesh';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressbook set bookName = 'XYZ', contactType = 'family' where firstName = 'Ram';
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> update addressbook set bookName = 'XYZ', contactType = 'family' where firstName = 'Vishal';
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from addressbook;
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+----------+-------------+
+| firstName | lastName | address          | city   | state       | zipCode | phoneNumber | email                | bookName | contactType |
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+----------+-------------+
+| Mangesh   | Bhujang  | Akurdi           | Pune   | Maharashtra | 431213  | 7620263999  | mangeshb9903@gmail.c | XYZ      | family      |
+| Nilesh    | Bhujang  | Titwala          | Kalyan | Maharashtra | 432213  | 7620263999  | nilesh@gmail.com     | XYZ      | family      |
+| Ram       | Pawar    | SantTukaramNagar | Pune   | Maharashtra | 432213  | 7720263777  | ram@gmail.com        | XYZ      | family      |
+| Vishal    | Nangre   | Nagar            | Nagar  | Maharashtra | 422213  | 7720263777  | vishal@gmail.com     | XYZ      | family      |
++-----------+----------+------------------+--------+-------------+---------+-------------+----------------------+----------+-------------+
+4 rows in set (0.00 sec)
+
+mysql>
